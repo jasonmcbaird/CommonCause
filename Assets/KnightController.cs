@@ -136,7 +136,7 @@ public class KnightController: NetworkBehaviour
 	private void Attack()
 	{
 		GetComponent<SpriteRenderer>().sprite = attackImage;
-		CreateAttackObject();
+		CmdCreateAttackObject(Camera.main.ScreenToWorldPoint(Input.mousePosition));
 		timeStartedCharging = -1;
 		lastAttackTime = Time.time;
 	}
@@ -144,7 +144,7 @@ public class KnightController: NetworkBehaviour
 	private void SpinAttack()
 	{
 		GetComponent<SpriteRenderer>().sprite = attackImage;
-		CreateSpinAttackObject();
+		CmdCreateSpinAttackObject();
 		timeStartedCharging = -1;
 		lastAttackTime = Time.time;
 	}
@@ -174,7 +174,6 @@ public class KnightController: NetworkBehaviour
 		{
 			GetComponent<SpriteRenderer>().color = defaultColor;
 		}
-		Destroy(attackObject);
 	}
 
 	private Direction GetDirection(float horizontalInput, float verticalInput)
@@ -203,9 +202,9 @@ public class KnightController: NetworkBehaviour
 		}
 	}
 
-	private void CreateAttackObject()
+	[Command]
+	private void CmdCreateAttackObject(Vector3 mousePosition)
 	{
-		Vector3 mousePosition = Camera.main.ScreenToWorldPoint(Input.mousePosition);
 		mousePosition.z = 0;
 		Direction facing = GetDirection(mousePosition.x - gameObject.transform.position.x, mousePosition.y - gameObject.transform.position.y);
 
@@ -236,12 +235,17 @@ public class KnightController: NetworkBehaviour
 		}
 		attackObject.transform.position = new Vector3(transform.position.x + offsetFromKnight.x, transform.position.y + offsetFromKnight.y, -1);
 		attackObject.transform.Rotate(GetRotationForDirection(facing));
+		NetworkServer.Spawn(attackObject);
+		Destroy(attackObject, attackSpeed);
 	}
 
-	private void CreateSpinAttackObject()
+	[Command]
+	private void CmdCreateSpinAttackObject()
 	{
 		attackObject = GameObject.Instantiate(chargeAttackSwoosh);
 		attackObject.transform.position = new Vector3(transform.position.x, transform.position.y, -1);
+		NetworkServer.Spawn(attackObject);
+		Destroy(attackObject, attackSpeed);
 	}
 
 	private static Vector3 GetRotationForDirection(Direction direction)
