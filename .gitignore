@@ -1,2 +1,7 @@
 Temp/
 Library/
+
+ExportedObj/
+obj/
+/*.csproj
+.DS_Store
