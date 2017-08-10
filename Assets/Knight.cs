@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Networking;
 
 enum Direction
 {
@@ -10,13 +11,13 @@ enum Direction
 	left
 };
 
-public class Knight: MonoBehaviour
+public class Knight: NetworkBehaviour
 {
 	public Sprite idleImage;
 	public Sprite attackImage;
 	public Sprite ultimateImage;
-	public Sprite basicAttackSwoosh;
 	public Sprite chargeAttackSwoosh;
+	public GameObject basicAttackSwoosh;
 	public int health = 5;
 
 	private static float reach = 1.5f;
@@ -24,10 +25,10 @@ public class Knight: MonoBehaviour
 	private static float attackSpeed = 0.2f;
 	private static float chargeTime = 0.75f;
 	private static float ultCooldown = 3f;
-	private static Color damagedColor = new Color();
-	private static Color defaultColor = new Color();
-	private static Color chargingColor = new Color();
-	private static Color chargedColor = new Color();
+	private static Color damagedColor = new Color(255f/255f, 132f/255f, 128f/255f);
+	private Color defaultColor = new Color(255f/255f, 255f/255f, 255f/255f);
+	private static Color chargingColor = new Color(220f/255f, 232f/255f, 160f/255f);
+	private static Color chargedColor = new Color(169f/255f, 192f/255f, 106f/255f);
 
 	private float lastAttackTime = 0;
 	private float timeLastDamaged = 0;
@@ -38,26 +39,21 @@ public class Knight: MonoBehaviour
 
 	void Start ()
 	{
-		damagedColor.r = 255f/255f;
-		damagedColor.g = 132f/255f;
-		damagedColor.b = 128f/255f;
-		damagedColor.a = 255f/255f;
-		defaultColor.r = 255f/255f;
-		defaultColor.g = 255f/255f;
-		defaultColor.b = 255f/255f;
-		defaultColor.a = 255f/255f;
-		chargingColor.r = 220f/255f;
-		chargingColor.g = 232f/255f;
-		chargingColor.b = 160f/255f;
-		chargingColor.a = 255f/255f;
-		chargedColor.r = 169f/255f;
-		chargedColor.g = 192f/255f;
-		chargedColor.b = 106f/255f;
-		chargedColor.a = 255f/255f;
+	}
+
+	public override void OnStartLocalPlayer()
+	{
+		base.OnStartLocalPlayer();
+		Color selectedColor = new Color(220f/255f, 220f/255f, 255f/255f);
+		defaultColor = selectedColor;
+		ChangeColor(selectedColor);
 	}
 
 	void Update ()
 	{
+		if(!isLocalPlayer) {
+			return;
+		}
 		float horizontalInput = Input.GetAxis ("Horizontal");
 		float verticalInput = Input.GetAxis ("Vertical");
 		bool attackChargeInput = Input.GetMouseButton(0);
@@ -75,7 +71,7 @@ public class Knight: MonoBehaviour
 
 		if(attackReleaseInput && TimeSinceStartedCharging() != -1)
 		{
-			if(TimeSinceStartedCharging()> chargeTime)
+			if(TimeSinceStartedCharging() > chargeTime)
 			{
 				SpinAttack();
 			}
@@ -214,10 +210,8 @@ public class Knight: MonoBehaviour
 		mousePosition.z = 0;
 		Direction facing = GetDirection(mousePosition.x - gameObject.transform.position.x, mousePosition.y - gameObject.transform.position.y);
 
-		attackObject = new GameObject("Swoosh");
-		SpriteRenderer swooshSpriteRenderer = attackObject.AddComponent<SpriteRenderer>() as SpriteRenderer;
-		swooshSpriteRenderer.sprite = basicAttackSwoosh;
-		swooshSpriteRenderer.transform.Rotate(GetRotationForDirection(facing));
+		attackObject = GameObject.Instantiate(basicAttackSwoosh);
+		attackObject.transform.Rotate(GetRotationForDirection(facing));
 
 		Vector2 offsetFromKnight = new Vector2(0, 0);
 		switch(facing)
@@ -244,25 +238,12 @@ public class Knight: MonoBehaviour
 			}
 		}
 		attackObject.transform.position = new Vector3(transform.position.x + offsetFromKnight.x, transform.position.y + offsetFromKnight.y, -1);
-		attackObject.tag = "PlayerAttack";
-		BoxCollider2D damageCollider = attackObject.AddComponent<BoxCollider2D>();
-		damageCollider.isTrigger = true;
-		BoxCollider2D physicsCollider = attackObject.AddComponent<BoxCollider2D>();
-		physicsCollider.size = new Vector2(basicAttackSwoosh.bounds.size.x * 0.8f, basicAttackSwoosh.bounds.size.y);
 	}
 
 	private void CreateSpinAttackObject()
 	{
 		attackObject = new GameObject("BigSwoosh");
-		SpriteRenderer swooshSpriteRenderer = attackObject.AddComponent<SpriteRenderer>() as SpriteRenderer;
-		swooshSpriteRenderer.sprite = chargeAttackSwoosh;
-
 		attackObject.transform.position = new Vector3(transform.position.x, transform.position.y, -1);
-		attackObject.tag = "PlayerAttackDouble";
-		BoxCollider2D damageCollider = attackObject.AddComponent<BoxCollider2D>();
-		damageCollider.isTrigger = true;
-		BoxCollider2D physicsCollider = attackObject.AddComponent<BoxCollider2D>();
-		physicsCollider.size = new Vector2(basicAttackSwoosh.bounds.size.x * 1.2f, basicAttackSwoosh.bounds.size.y  * 1.2f);
 	}
 
 	private static Vector3 GetRotationForDirection(Direction direction)
