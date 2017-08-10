@@ -16,7 +16,7 @@ public class Knight: NetworkBehaviour
 	public Sprite idleImage;
 	public Sprite attackImage;
 	public Sprite ultimateImage;
-	public Sprite chargeAttackSwoosh;
+	public GameObject chargeAttackSwoosh;
 	public GameObject basicAttackSwoosh;
 	public int health = 5;
 
@@ -211,8 +211,6 @@ public class Knight: NetworkBehaviour
 		Direction facing = GetDirection(mousePosition.x - gameObject.transform.position.x, mousePosition.y - gameObject.transform.position.y);
 
 		attackObject = GameObject.Instantiate(basicAttackSwoosh);
-		attackObject.transform.Rotate(GetRotationForDirection(facing));
-
 		Vector2 offsetFromKnight = new Vector2(0, 0);
 		switch(facing)
 		{
@@ -238,11 +236,12 @@ public class Knight: NetworkBehaviour
 			}
 		}
 		attackObject.transform.position = new Vector3(transform.position.x + offsetFromKnight.x, transform.position.y + offsetFromKnight.y, -1);
+		attackObject.transform.Rotate(GetRotationForDirection(facing));
 	}
 
 	private void CreateSpinAttackObject()
 	{
-		attackObject = new GameObject("BigSwoosh");
+		attackObject = GameObject.Instantiate(chargeAttackSwoosh);
 		attackObject.transform.position = new Vector3(transform.position.x, transform.position.y, -1);
 	}
 
