@@ -157,9 +157,9 @@ MonoBehaviour:
   idleImage: {fileID: 21300000, guid: a11882b4ad8774d64b83b67d0dafc04b, type: 3}
   attackImage: {fileID: 21300000, guid: c16c612a7fe49467b831ebd57747dc3d, type: 3}
   ultimateImage: {fileID: 21300000, guid: ad3bc5044974e49e8b2d5b20a7b32e98, type: 3}
-  chargeAttackSwoosh: {fileID: 1206190205750564, guid: 8f1be18a736814a038ef9f19271bd40d,
-    type: 2}
   basicAttackSwoosh: {fileID: 1139794969274564, guid: 6acb5ad5c25784c4c93e88760b513bb3,
+    type: 2}
+  chargeAttackSwoosh: {fileID: 1206190205750564, guid: 8f1be18a736814a038ef9f19271bd40d,
     type: 2}
   health: 5
 --- !u!212 &212045757136658528

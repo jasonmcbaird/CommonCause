@@ -11,13 +11,13 @@ enum Direction
 	left
 };
 
-public class Knight: NetworkBehaviour
+public class KnightController: NetworkBehaviour
 {
 	public Sprite idleImage;
 	public Sprite attackImage;
 	public Sprite ultimateImage;
-	public GameObject chargeAttackSwoosh;
 	public GameObject basicAttackSwoosh;
+	public GameObject chargeAttackSwoosh;
 	public int health = 5;
 
 	private static float reach = 1.5f;
@@ -44,9 +44,8 @@ public class Knight: NetworkBehaviour
 	public override void OnStartLocalPlayer()
 	{
 		base.OnStartLocalPlayer();
-		Color selectedColor = new Color(220f/255f, 220f/255f, 255f/255f);
-		defaultColor = selectedColor;
-		ChangeColor(selectedColor);
+		defaultColor = new Color(220f/255f, 220f/255f, 255f/255f);
+		ChangeColor(defaultColor);
 	}
 
 	void Update ()
@@ -308,9 +307,3 @@ public class Knight: NetworkBehaviour
 	}
 	
 };
-
-
-class KnightColorer
-{
-	
-}
