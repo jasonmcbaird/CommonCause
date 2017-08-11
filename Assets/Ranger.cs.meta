@@ -1,0 +1,18 @@
+fileFormatVersion: 2
+guid: 22258c73ae1c56643a99ee21c93da336
+timeCreated: 1502329264
+licenseType: Free
+MonoImporter:
+  serializedVersion: 2
+  defaultReferences:
+  - idleImage: {instanceID: 0}
+  - attackImage: {instanceID: 0}
+  - ultimateImage: {instanceID: 0}
+  - chargeAttackPierce: {instanceID: 0}
+  - basicAttackArrow: {fileID: 1139794969274564, guid: 3055d91a2ab863043bdfc41776a05fc8,
+      type: 2}
+  executionOrder: 0
+  icon: {instanceID: 0}
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
