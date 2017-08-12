@@ -141,9 +141,17 @@ public class KnightController: NetworkBehaviour
 		lastAttackTime = Time.time;
 	}
 
+
 	private void UltimateAttack()
 	{
 		GetComponent<SpriteRenderer>().sprite = ultimateImage;
+		lastUltTime = Time.time;
+		CmdPullEnemies();
+	}
+
+	[Command]
+	private void CmdPullEnemies()
+	{
 		ultCollider = gameObject.AddComponent<BoxCollider2D>();
 		GameObject[] slimes = GameObject.FindGameObjectsWithTag("Slime");
 		foreach(GameObject slime in slimes)
@@ -153,7 +161,6 @@ public class KnightController: NetworkBehaviour
 			rigidbody.velocity = offsetFromSlimeToKnight * 2;
 			slime.GetComponent<Slime>().stun();
 		}
-		lastUltTime = Time.time;
 	}
 
 	private void FinishAttackAnimation()

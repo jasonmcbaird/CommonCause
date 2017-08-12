@@ -35,8 +35,6 @@ public class Slime: NetworkBehaviour
 
 	void Update()
 	{
-		if(!isServer)
-		{ return; }
 		if(Time.time > timeLastStunned + 2f)
 		{
 			timeLastStunned = -1;
