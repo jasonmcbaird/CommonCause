@@ -2,5 +2,6 @@ Temp/
 Library/
 ExportedObj/
 obj/
+CommonCauseGame.app/
 /*.csproj
 .DS_Store
