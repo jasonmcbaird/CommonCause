@@ -24,7 +24,7 @@ public class KnightController: NetworkBehaviour
 	private static float speed = 6f;
 	private static float attackSpeed = 0.2f;
 	private static float chargeTime = 0.75f;
-	private static float ultCooldown = 3f;
+	private static float ultCooldown = 8f;
 	private static Color damagedColor = new Color(255f/255f, 132f/255f, 128f/255f);
 	private Color defaultColor = new Color(255f/255f, 255f/255f, 255f/255f);
 	private static Color chargingColor = new Color(220f/255f, 232f/255f, 160f/255f);

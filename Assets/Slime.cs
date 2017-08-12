@@ -44,7 +44,8 @@ public class Slime: NetworkBehaviour
 
 		if(!isStunned())
 		{
-			MoveTowardPlayer();
+			FindTarget();
+			MoveTowardTarget();
 		}
 
 		if(GetComponent<SpriteRenderer>().color == defaultColor && isStunned())
@@ -73,8 +74,34 @@ public class Slime: NetworkBehaviour
 		return timeLastStunned != -1;
 	}
 
-	private void MoveTowardPlayer()
+	private void FindTarget()
 	{
+		GameObject[] players = GameObject.FindGameObjectsWithTag("Player");
+		foreach(GameObject player in players)
+		{
+			if(target == null)
+			{
+				target = player;
+			}
+			else
+			{
+				if(DistanceToObject(player) < DistanceToObject(target))
+				{
+					target = player;
+				}
+			}
+		}
+	}
+
+	private float DistanceToObject(GameObject gameObject)
+	{
+		return Mathf.Abs((transform.position - gameObject.transform.position).magnitude);
+	}
+
+	private void MoveTowardTarget()
+	{
+		if(target == null)
+		{ return; }
 		Vector2 pathToTarget = target.transform.position - transform.position;
 		GetComponent<Rigidbody2D>().velocity = pathToTarget.normalized * 100 * speed * Time.deltaTime;
 	}

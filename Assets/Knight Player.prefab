@@ -45,7 +45,7 @@ GameObject:
   - component: {fileID: 114665294377440116}
   m_Layer: 0
   m_Name: Knight Player
-  m_TagString: Untagged
+  m_TagString: Player
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -224,7 +224,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f852064d476674d5eb06abe6c3a473e9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  health: 5
+  maxHealth: 5
   healthBar: {fileID: 224608346139390080}
 --- !u!114 &114728886328828148
 MonoBehaviour:
