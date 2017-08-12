@@ -60,7 +60,7 @@ public class Ranger : NetworkBehaviour
         {
             if (TimeSinceStartedCharging() > chargeTime)
             {
-                SpinAttack();
+                ChargeAttack();
             }
             else
             {
@@ -129,10 +129,10 @@ public class Ranger : NetworkBehaviour
         lastAttackTime = Time.time;
     }
 
-    private void SpinAttack()
+    private void ChargeAttack()
     {
         GetComponent<SpriteRenderer>().sprite = attackImage;
-        CreateSpinAttackObject();
+		CreatePiercingArrow();
         timeStartedCharging = -1;
         lastAttackTime = Time.time;
     }
@@ -191,6 +191,12 @@ public class Ranger : NetworkBehaviour
         }
     }
 
+	private void CreatePiercingArrow()
+	{
+		CreateArrow();
+		arrow.GetComponent<RangerBasicArrow>().piercing = true;
+	}
+
     private void CreateArrow()
     {
         Vector3 mousePosition = Camera.main.ScreenToWorldPoint(Input.mousePosition);
@@ -203,13 +209,6 @@ public class Ranger : NetworkBehaviour
 		arrow.transform.position = transform.position + new Vector3(playerDifference.x, playerDifference.y, -1).normalized;
         arrow.transform.rotation = Quaternion.AngleAxis(arrowAngle, Vector3.forward);
         arrow.SendMessage("SetLaunchVector", playerDifference);
-
-    }
-
-    private void CreateSpinAttackObject()
-    {
-       // attackObject = GameObject.Instantiate(basicAttackArrow);
-       // attackObject.transform.position = new Vector3(transform.position.x, transform.position.y, -1);
     }
 
     private static Vector3 GetRotationForDirection(Direction direction)

@@ -6,19 +6,10 @@ using UnityEngine.Networking;
 public class RangerBasicArrow : NetworkBehaviour
 {
     private float arrowSpeed = 66f;
+	public bool piercing = false;
     public float arrowDirectionX;
     public float arrowDirectionY;
     Rigidbody2D rigidBody;
-
-    void Awake ()
-    {
-        
-    }
-	
-	void Update ()
-    {
-        
-    }
 
     void SetLaunchVector(Vector3 launchVector)
     {
@@ -30,7 +21,7 @@ public class RangerBasicArrow : NetworkBehaviour
 
     void OnTriggerEnter2D(Collider2D other)
     {
-        if (!other.gameObject.CompareTag("Player"))
+        if (!other.gameObject.CompareTag("Player") && !piercing)
 		{
         	DestroyObject(gameObject);
 		}
