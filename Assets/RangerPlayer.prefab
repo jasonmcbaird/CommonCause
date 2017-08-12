@@ -227,10 +227,9 @@ MonoBehaviour:
   idleImage: {fileID: 21300000, guid: f2c4eac0ba5cc72459e8193df2a7e295, type: 3}
   attackImage: {fileID: 21300000, guid: 6c177ce9d153aa646a70fe126627f675, type: 3}
   ultimateImage: {fileID: 21300000, guid: a660d96f366dd7342921cd0a90be7149, type: 3}
-  chargeAttackPierce: {fileID: 0}
   basicAttackArrow: {fileID: 1139794969274564, guid: 3055d91a2ab863043bdfc41776a05fc8,
     type: 2}
-  arrowStart: {fileID: 0}
+  bomb: {fileID: 1670017642205910, guid: e5caa5241713d4580a09fb2358f17e0e, type: 2}
 --- !u!114 &114726052740640246
 MonoBehaviour:
   m_ObjectHideFlags: 1

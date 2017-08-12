@@ -8,9 +8,8 @@ public class Ranger : NetworkBehaviour
     public Sprite idleImage;
     public Sprite attackImage;
     public Sprite ultimateImage;
-    public GameObject chargeAttackPierce;
     public GameObject basicAttackArrow;
-    public Transform arrowStart;
+	public GameObject bomb;
 
     private static float speed = 6f;
     private static float attackSpeed = 0.2f;
@@ -26,7 +25,6 @@ public class Ranger : NetworkBehaviour
     private float timeStartedCharging = -1;
     private float lastUltTime = 0;
     private GameObject arrow;
-    private BoxCollider2D ultCollider;
 
 	public override void OnStartLocalPlayer()
 	{
@@ -96,11 +94,6 @@ public class Ranger : NetworkBehaviour
         {
             GetComponent<SpriteRenderer>().sprite = idleImage;
         }
-
-        if (Time.time > lastUltTime + ultCooldown)
-        {
-            Destroy(ultCollider);
-        }
     }
 
     void OnTriggerEnter2D(Collider2D other)
@@ -135,15 +128,7 @@ public class Ranger : NetworkBehaviour
     private void UltimateAttack()
     {
         GetComponent<SpriteRenderer>().sprite = ultimateImage;
-        ultCollider = gameObject.AddComponent<BoxCollider2D>();
-        GameObject[] slimes = GameObject.FindGameObjectsWithTag("Slime");
-        foreach (GameObject slime in slimes)
-        {
-            Rigidbody2D rigidbody = slime.GetComponent<Rigidbody2D>();
-            Vector2 offsetFromSlimeToKnight = transform.position - slime.transform.position;
-            rigidbody.velocity = offsetFromSlimeToKnight * 2;
-            slime.GetComponent<Slime>().stun();
-        }
+		CmdCreateBombs();
         lastUltTime = Time.time;
     }
 
@@ -201,6 +186,22 @@ public class Ranger : NetworkBehaviour
         arrow.SendMessage("SetLaunchVector", playerDifference);
 		NetworkServer.Spawn(arrow);
     }
+
+	[Command]
+	private void CmdCreateBombs()
+	{
+		GameObject bomb1 = GameObject.Instantiate(bomb);
+		GameObject bomb2 = GameObject.Instantiate(bomb);
+		GameObject bomb3 = GameObject.Instantiate(bomb);
+
+		bomb1.transform.position = transform.position + new Vector3(0, 2, 0);
+		bomb2.transform.position = transform.position + new Vector3(Mathf.Sqrt(2), -Mathf.Sqrt(2), 0);
+		bomb3.transform.position = transform.position + new Vector3(- Mathf.Sqrt(2), -Mathf.Sqrt(2), 0);
+
+		NetworkServer.Spawn(bomb1);
+		NetworkServer.Spawn(bomb2);
+		NetworkServer.Spawn(bomb3);
+	}
 
     private static Vector3 GetRotationForDirection(Direction direction)
     {
