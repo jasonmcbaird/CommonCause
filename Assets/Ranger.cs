@@ -10,7 +10,6 @@ public class Ranger : NetworkBehaviour
     public Sprite ultimateImage;
     public GameObject chargeAttackPierce;
     public GameObject basicAttackArrow;
-    public int health = 5;
     public Transform arrowStart;
 
     private static float speed = 6f;
@@ -29,18 +28,18 @@ public class Ranger : NetworkBehaviour
     private GameObject arrow;
     private BoxCollider2D ultCollider;
 
-    void Start()
-    {
-        Color selectedColor = new Color(220f / 255f, 220f / 255f, 255f / 255f);
-        defaultColor = selectedColor;
-        ChangeColor(selectedColor);
-    }
-
-   
+	public override void OnStartLocalPlayer()
+	{
+		base.OnStartLocalPlayer();
+		defaultColor = new Color(220f/255f, 220f/255f, 255f/255f);
+		ChangeColor(defaultColor);
+	}
 
     void Update()
     {
-  
+		if(!isLocalPlayer) {
+			return;
+		}
         float horizontalInput = Input.GetAxis("Horizontal");
         float verticalInput = Input.GetAxis("Vertical");
         bool attackChargeInput = Input.GetMouseButton(0);
@@ -110,13 +109,9 @@ public class Ranger : NetworkBehaviour
         {
             if (!other.gameObject.GetComponent<Slime>().isStunned())
             {
-                GetComponent<SpriteRenderer>().color = damagedColor;
-                health -= 1;
-                timeLastDamaged = Time.time;
-                if (health <= 0)
-                {
-                    DestroyObject(gameObject);
-                }
+				GetComponent<SpriteRenderer>().color = damagedColor;
+				GetComponent<Health>().TakeDamage(1);
+				timeLastDamaged = Time.time;
             }
         }
     }
@@ -124,7 +119,7 @@ public class Ranger : NetworkBehaviour
     private void Attack()
     {
         GetComponent<SpriteRenderer>().sprite = attackImage;
-        CreateArrow();
+		CmdCreateArrow(Camera.main.ScreenToWorldPoint(Input.mousePosition), false);
         timeStartedCharging = -1;
         lastAttackTime = Time.time;
     }
@@ -132,7 +127,7 @@ public class Ranger : NetworkBehaviour
     private void ChargeAttack()
     {
         GetComponent<SpriteRenderer>().sprite = attackImage;
-		CreatePiercingArrow();
+		CmdCreateArrow(Camera.main.ScreenToWorldPoint(Input.mousePosition), true);
         timeStartedCharging = -1;
         lastAttackTime = Time.time;
     }
@@ -190,25 +185,21 @@ public class Ranger : NetworkBehaviour
             }
         }
     }
-
-	private void CreatePiercingArrow()
-	{
-		CreateArrow();
-		arrow.GetComponent<RangerBasicArrow>().piercing = true;
-	}
-
-    private void CreateArrow()
+	
+	[Command]
+	private void CmdCreateArrow(Vector3 mousePosition, bool piercing)
     {
-        Vector3 mousePosition = Camera.main.ScreenToWorldPoint(Input.mousePosition);
-        Vector3 playerPosition = this.transform.position;
-        Vector3 playerDifference = (mousePosition - playerPosition);
-        float arrowAngle = (Mathf.Atan2(playerDifference.y, playerDifference.x) * Mathf.Rad2Deg) + 180;
-
+		mousePosition.z = 0;
         arrow = GameObject.Instantiate(basicAttackArrow);
+		arrow.GetComponent<RangerBasicArrow>().piercing = piercing;
+
+		Vector3 playerDifference = mousePosition - transform.position;
+		float arrowAngle = Mathf.Atan2(playerDifference.y, playerDifference.x) * Mathf.Rad2Deg + 180;
 
 		arrow.transform.position = transform.position + new Vector3(playerDifference.x, playerDifference.y, -1).normalized;
         arrow.transform.rotation = Quaternion.AngleAxis(arrowAngle, Vector3.forward);
         arrow.SendMessage("SetLaunchVector", playerDifference);
+		NetworkServer.Spawn(arrow);
     }
 
     private static Vector3 GetRotationForDirection(Direction direction)

@@ -98,7 +98,8 @@ public class Slime: NetworkBehaviour
 
 	private void MoveTowardTarget()
 	{
-		if(target == null)
+		//if(target == null)
+		if(true)
 		{ return; }
 		Vector2 pathToTarget = target.transform.position - transform.position;
 		GetComponent<Rigidbody2D>().velocity = pathToTarget.normalized * 100 * speed * Time.deltaTime;

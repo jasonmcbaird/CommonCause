@@ -18,7 +18,6 @@ public class KnightController: NetworkBehaviour
 	public Sprite ultimateImage;
 	public GameObject basicAttackSwoosh;
 	public GameObject chargeAttackSwoosh;
-	public int health = 5;
 
 	private static float reach = 1.5f;
 	private static float speed = 6f;
