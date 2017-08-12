@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Networking;
 
-public class Ranger : MonoBehaviour
+public class Ranger : NetworkBehaviour
 {
     public Sprite idleImage;
     public Sprite attackImage;
@@ -13,11 +13,8 @@ public class Ranger : MonoBehaviour
     public int health = 5;
     public Transform arrowStart;
 
-    private static float reach = 1.5f;
     private static float speed = 6f;
     private static float attackSpeed = 0.2f;
-  //  private static float basicArrowSpeed = 12f;
-  //  private static float chargeArrowSpeed = 20f;
     private static float chargeTime = 0.75f;
     private static float ultCooldown = 3f;
     private static Color damagedColor = new Color(255f / 255f, 132f / 255f, 128f / 255f);
@@ -202,37 +199,8 @@ public class Ranger : MonoBehaviour
         float arrowAngle = (Mathf.Atan2(playerDifference.y, playerDifference.x) * Mathf.Rad2Deg) + 180;
 
         arrow = GameObject.Instantiate(basicAttackArrow);
-       
-        //arrow.GetComponent<RangerBasicArrow>().arrowDirectionX = playerDifference.x;
-        //arrow.GetComponent<RangerBasicArrow>().arrowDirectionY = playerDifference.y;
 
-        Direction facing = GetDirection(mousePosition.x - gameObject.transform.position.x, mousePosition.y - gameObject.transform.position.y);
-
-        Vector2 offsetFromPlayer = new Vector2(0, 0);
-        switch (facing)
-        {
-            case Direction.up:
-                {
-                    offsetFromPlayer = new Vector2(0, reach);
-                    break;
-                }
-            case Direction.right:
-                {
-                    offsetFromPlayer = new Vector2(reach, 0);
-                    break;
-                }
-            case Direction.down:
-                {
-                    offsetFromPlayer = new Vector2(0, -reach);
-                    break;
-                }
-            case Direction.left:
-                {
-                    offsetFromPlayer = new Vector2(-reach, 0);
-                    break;
-                }
-        }
-        arrow.transform.position = new Vector2(transform.position.x + offsetFromPlayer.x, transform.position.y + offsetFromPlayer.y);
+		arrow.transform.position = transform.position + new Vector3(playerDifference.x, playerDifference.y, -1).normalized;
         arrow.transform.rotation = Quaternion.AngleAxis(arrowAngle, Vector3.forward);
         arrow.SendMessage("SetLaunchVector", playerDifference);
 

@@ -24,6 +24,8 @@ GameObject:
   - component: {fileID: 61225976602766448}
   - component: {fileID: 50786591669723846}
   - component: {fileID: 114784648251956390}
+  - component: {fileID: 114018207827706314}
+  - component: {fileID: 114451144443118406}
   m_Layer: 0
   m_Name: RangerBasicAttack
   m_TagString: PlayerAttack
@@ -38,7 +40,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1139794969274564}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -8.987892, y: -0.8886889, z: 0}
+  m_LocalPosition: {x: 6.7249207, y: -5.898885, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
@@ -87,7 +89,7 @@ BoxCollider2D:
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 5.12, y: 7.68}
+  m_Size: {x: 1.3, y: 0.75}
   m_EdgeRadius: 0
 --- !u!61 &61944277390315622
 BoxCollider2D:
@@ -112,8 +114,61 @@ BoxCollider2D:
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 2, y: 1}
+  m_Size: {x: 1, y: 0.6}
   m_EdgeRadius: 0
+--- !u!114 &114018207827706314
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1139794969274564}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 372142912, guid: dc443db3e92b4983b9738c1131f555cb, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_SceneId:
+    m_Value: 0
+  m_AssetId:
+    i0: 48
+    i1: 85
+    i2: 217
+    i3: 26
+    i4: 42
+    i5: 184
+    i6: 99
+    i7: 4
+    i8: 59
+    i9: 223
+    i10: 196
+    i11: 23
+    i12: 118
+    i13: 160
+    i14: 95
+    i15: 200
+  m_ServerOnly: 0
+  m_LocalPlayerAuthority: 0
+--- !u!114 &114451144443118406
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1139794969274564}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: -1768714887, guid: dc443db3e92b4983b9738c1131f555cb, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_TransformSyncMode: 2
+  m_SendInterval: 0.1
+  m_SyncRotationAxis: 3
+  m_RotationSyncCompression: 0
+  m_SyncSpin: 0
+  m_MovementTheshold: 0.001
+  m_VelocityThreshold: 0.0001
+  m_SnapThreshold: 5
+  m_InterpolateRotation: 1
+  m_InterpolateMovement: 1
 --- !u!114 &114784648251956390
 MonoBehaviour:
   m_ObjectHideFlags: 1

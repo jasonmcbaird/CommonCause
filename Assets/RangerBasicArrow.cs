@@ -1,10 +1,11 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Networking;
 
-public class RangerBasicArrow : MonoBehaviour
+public class RangerBasicArrow : NetworkBehaviour
 {
-    private float arrowSpeed = 5.5f;
+    private float arrowSpeed = 66f;
     public float arrowDirectionX;
     public float arrowDirectionY;
     Rigidbody2D rigidBody;
@@ -14,7 +15,6 @@ public class RangerBasicArrow : MonoBehaviour
         
     }
 	
-	// Update is called once per frame
 	void Update ()
     {
         
@@ -25,19 +25,15 @@ public class RangerBasicArrow : MonoBehaviour
         arrowDirectionX = launchVector.x;
         arrowDirectionY = launchVector.y;
         rigidBody = GetComponent<Rigidbody2D>();
-        rigidBody.AddForce(new Vector2(arrowDirectionX, arrowDirectionY) * arrowSpeed, ForceMode2D.Impulse);
+		rigidBody.velocity = new Vector2(arrowDirectionX, arrowDirectionY).normalized * arrowSpeed;
     }
 
     void OnTriggerEnter2D(Collider2D other)
     {
-        if (other.gameObject.CompareTag("Player"))
-        {
-
-        }
-        else
-        {
-            DestroyObject(gameObject);
-        }
+        if (!other.gameObject.CompareTag("Player"))
+		{
+        	DestroyObject(gameObject);
+		}
     }
 
 }

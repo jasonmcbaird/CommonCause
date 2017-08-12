@@ -24,9 +24,11 @@ GameObject:
   - component: {fileID: 50071911832327446}
   - component: {fileID: 61061462596451986}
   - component: {fileID: 61050351640035294}
+  - component: {fileID: 114726052740640246}
+  - component: {fileID: 114316342353854648}
   m_Layer: 0
   m_Name: RangerPlayer
-  m_TagString: Untagged
+  m_TagString: Player
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -114,6 +116,27 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 2, y: 2}
   m_EdgeRadius: 0
+--- !u!114 &114316342353854648
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1121771183875290}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: -1768714887, guid: dc443db3e92b4983b9738c1131f555cb, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_TransformSyncMode: 2
+  m_SendInterval: 0.1
+  m_SyncRotationAxis: 3
+  m_RotationSyncCompression: 0
+  m_SyncSpin: 0
+  m_MovementTheshold: 0.001
+  m_VelocityThreshold: 0.0001
+  m_SnapThreshold: 5
+  m_InterpolateRotation: 1
+  m_InterpolateMovement: 1
 --- !u!114 &114549369077531954
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -133,6 +156,38 @@ MonoBehaviour:
     type: 2}
   health: 5
   arrowStart: {fileID: 0}
+--- !u!114 &114726052740640246
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1121771183875290}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 372142912, guid: dc443db3e92b4983b9738c1131f555cb, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_SceneId:
+    m_Value: 0
+  m_AssetId:
+    i0: 254
+    i1: 210
+    i2: 194
+    i3: 136
+    i4: 8
+    i5: 134
+    i6: 118
+    i7: 36
+    i8: 73
+    i9: 27
+    i10: 41
+    i11: 68
+    i12: 151
+    i13: 214
+    i14: 17
+    i15: 243
+  m_ServerOnly: 0
+  m_LocalPlayerAuthority: 1
 --- !u!212 &212045757136658528
 SpriteRenderer:
   m_ObjectHideFlags: 1
