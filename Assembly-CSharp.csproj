@@ -51,7 +51,10 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+     <Compile Include="Assets\Health.cs" />
      <Compile Include="Assets\KnightController.cs" />
+     <Compile Include="Assets\Ranger.cs" />
+     <Compile Include="Assets\RangerBasicArrow.cs" />
      <Compile Include="Assets\Slime.cs" />
  <Reference Include="UnityEngine.UI">
  <HintPath>/Applications/Unity/Unity.app/Contents/UnityExtensions/Unity/GUISystem/UnityEngine.UI.dll</HintPath>

@@ -123,12 +123,8 @@ public class KnightController: NetworkBehaviour
 			if(!other.gameObject.GetComponent<Slime>().isStunned())
 			{
 				GetComponent<SpriteRenderer>().color = damagedColor;
-				health -= 1;
+				GetComponent<Health>().TakeDamage(1);
 				timeLastDamaged = Time.time;
-				if(health <= 0)
-				{
-					DestroyObject(gameObject);
-				}
 			}
 		}
 	}

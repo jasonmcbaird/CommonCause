@@ -1,8 +1,9 @@
 ﻿<Properties StartupItem="Assembly-CSharp.csproj">
   <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" PreferredExecutionTarget="Unity.Instance.Unity Editor" />
-  <MonoDevelop.Ide.Workbench ActiveDocument="Assets/Knight.cs">
+  <MonoDevelop.Ide.Workbench ActiveDocument="Assets/KnightController.cs">
     <Files>
-      <File FileName="Assets/Knight.cs" Line="312" Column="1" />
+      <File FileName="Assets/KnightController.cs" Line="272" Column="31" />
+      <File FileName="Assets/Slime.cs" Line="13" Column="37" />
     </Files>
   </MonoDevelop.Ide.Workbench>
   <MonoDevelop.Ide.DebuggingService.Breakpoints>

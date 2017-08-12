@@ -84,17 +84,13 @@ public class Slime: MonoBehaviour
 			GetComponent<SpriteRenderer>().color = damagedColor;
 			if(other.gameObject.CompareTag("PlayerAttack"))
 			{
-				health -= 1;
+				GetComponent<Health>().TakeDamage(2);
 			}
 			else if(other.gameObject.CompareTag("PlayerAttackDouble"))
 			{
-				health -= 2;
+				GetComponent<Health>().TakeDamage(2);
 			}
 			timeLastDamaged = Time.time;
-			if(health <= 0)
-			{
-				DestroyObject(gameObject);
-			}
 		}
 	}
 }
