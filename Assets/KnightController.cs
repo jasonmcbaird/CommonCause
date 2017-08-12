@@ -37,10 +37,6 @@ public class KnightController: NetworkBehaviour
 	private GameObject attackObject;
 	private BoxCollider2D ultCollider;
 
-	void Start ()
-	{
-	}
-
 	public override void OnStartLocalPlayer()
 	{
 		base.OnStartLocalPlayer();

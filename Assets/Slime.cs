@@ -1,12 +1,12 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Networking;
 
-public class Slime: MonoBehaviour
+public class Slime: NetworkBehaviour
 {
 
 	public GameObject target;
-	public int health = 3;
 	public static int speed = 3;
 
 	private static Color damagedColor = new Color();
@@ -35,6 +35,8 @@ public class Slime: MonoBehaviour
 
 	void Update()
 	{
+		if(!isServer)
+		{ return; }
 		if(Time.time > timeLastStunned + 2f)
 		{
 			timeLastStunned = -1;
@@ -84,7 +86,7 @@ public class Slime: MonoBehaviour
 			GetComponent<SpriteRenderer>().color = damagedColor;
 			if(other.gameObject.CompareTag("PlayerAttack"))
 			{
-				GetComponent<Health>().TakeDamage(2);
+				GetComponent<Health>().TakeDamage(1);
 			}
 			else if(other.gameObject.CompareTag("PlayerAttackDouble"))
 			{

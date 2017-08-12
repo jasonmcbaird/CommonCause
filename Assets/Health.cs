@@ -7,9 +7,14 @@ using UnityEngine.Networking;
 public class Health : NetworkBehaviour
 {
 	[SyncVar(hook = "OnChangeHealth")]
-	public int health = maxHealth;
-	public static int maxHealth = 5;
+	int health;
+	public int maxHealth;
 	public RectTransform healthBar;
+
+	void Start ()
+	{
+		health = maxHealth;
+	}
 
 	public void TakeDamage(int damage)
 	{
@@ -20,12 +25,12 @@ public class Health : NetworkBehaviour
 		{
 			Destroy(gameObject);
 		}
-		print(health);
-
 	}
 
 	void OnChangeHealth(int health)
 	{
+		if(healthBar == null)
+		{ return; }
 		healthBar.sizeDelta = new Vector2((float)health / (float)maxHealth * 100f, healthBar.sizeDelta.y);
 	}
 
