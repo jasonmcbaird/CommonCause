@@ -54,6 +54,7 @@
      <Compile Include="Assets\Bomb.cs" />
      <Compile Include="Assets\Health.cs" />
      <Compile Include="Assets\KnightController.cs" />
+     <Compile Include="Assets\NetworkController.cs" />
      <Compile Include="Assets\Ranger.cs" />
      <Compile Include="Assets\RangerBasicArrow.cs" />
      <Compile Include="Assets\Slime.cs" />

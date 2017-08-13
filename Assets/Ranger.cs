@@ -8,7 +8,7 @@ public class Ranger : NetworkBehaviour
     public Sprite idleImage;
     public Sprite attackImage;
     public Sprite ultimateImage;
-    public GameObject basicAttackArrow;
+    public GameObject basicAttackPrefab;
 	public GameObject bomb;
 
     private static float speed = 6f;
@@ -25,7 +25,7 @@ public class Ranger : NetworkBehaviour
     private float timeStartedCharging = -1;
     private float lastUltTime = 0;
     private GameObject arrow;
-
+	
 	public override void OnStartLocalPlayer()
 	{
 		base.OnStartLocalPlayer();
@@ -175,7 +175,7 @@ public class Ranger : NetworkBehaviour
 	private void CmdCreateArrow(Vector3 mousePosition, bool piercing)
     {
 		mousePosition.z = 0;
-        arrow = GameObject.Instantiate(basicAttackArrow);
+        arrow = GameObject.Instantiate(basicAttackPrefab);
 		arrow.GetComponent<RangerBasicArrow>().piercing = piercing;
 
 		Vector3 playerDifference = mousePosition - transform.position;

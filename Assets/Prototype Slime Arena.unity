@@ -601,8 +601,8 @@ GameObject:
   serializedVersion: 5
   m_Component:
   - component: {fileID: 420205936}
-  - component: {fileID: 420205935}
   - component: {fileID: 420205934}
+  - component: {fileID: 420205935}
   m_Layer: 0
   m_Name: NetworkManager
   m_TagString: Untagged
@@ -633,21 +633,20 @@ MonoBehaviour:
   m_GameObject: {fileID: 420205933}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: -822479833, guid: dc443db3e92b4983b9738c1131f555cb, type: 3}
+  m_Script: {fileID: 11500000, guid: fc650828c39f441838d930bd27b939d6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_NetworkPort: 5559
+  m_NetworkPort: 7777
   m_ServerBindToIP: 0
   m_ServerBindAddress: 
-  m_NetworkAddress: 71.85.232.234
+  m_NetworkAddress: localhost
   m_DontDestroyOnLoad: 1
   m_RunInBackground: 1
   m_ScriptCRCCheck: 1
   m_MaxDelay: 0.01
   m_LogLevel: 2
-  m_PlayerPrefab: {fileID: 1121771183875290, guid: fed2c28808867624491b294497d611f3,
-    type: 2}
-  m_AutoCreatePlayer: 1
+  m_PlayerPrefab: {fileID: 0}
+  m_AutoCreatePlayer: 0
   m_PlayerSpawnMethod: 0
   m_OfflineScene: 
   m_OnlineScene: 
@@ -656,6 +655,8 @@ MonoBehaviour:
   - {fileID: 1206190205750564, guid: 8f1be18a736814a038ef9f19271bd40d, type: 2}
   - {fileID: 1139794969274564, guid: 3055d91a2ab863043bdfc41776a05fc8, type: 2}
   - {fileID: 1670017642205910, guid: e5caa5241713d4580a09fb2358f17e0e, type: 2}
+  - {fileID: 1121771183875290, guid: fed2c28808867624491b294497d611f3, type: 2}
+  - {fileID: 1121771183875290, guid: 976000cd5228f48e9b7c369db56383d6, type: 2}
   m_CustomConfig: 0
   m_MaxConnections: 4
   m_ConnectionConfig:
@@ -698,7 +699,7 @@ MonoBehaviour:
     m_MaxTimerTimeout: 12000
     m_MinNetSimulatorTimeout: 1
     m_MaxNetSimulatorTimeout: 12000
-  m_Channels: 
+  m_Channels: 0500000000000000
   m_UseWebSockets: 0
   m_UseSimulator: 0
   m_SimulatedLatency: 1
@@ -711,6 +712,12 @@ MonoBehaviour:
   matchSize: 4
   isNetworkActive: 0
   matchMaker: {fileID: 0}
+  spawnPosition: {fileID: 1929525354}
+  currentPlayer: 0
+  playerOnePrefab: {fileID: 1121771183875290, guid: fed2c28808867624491b294497d611f3,
+    type: 2}
+  playerTwoPrefab: {fileID: 1121771183875290, guid: 976000cd5228f48e9b7c369db56383d6,
+    type: 2}
 --- !u!4 &420205936
 Transform:
   m_ObjectHideFlags: 0

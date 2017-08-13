@@ -16,8 +16,8 @@ public class KnightController: NetworkBehaviour
 	public Sprite idleImage;
 	public Sprite attackImage;
 	public Sprite ultimateImage;
-	public GameObject basicAttackSwoosh;
-	public GameObject chargeAttackSwoosh;
+	public GameObject basicAttackPrefab;
+	public GameObject chargeAttackPrefab;
 
 	private static float reach = 1.5f;
 	private static float speed = 6f;
@@ -43,7 +43,7 @@ public class KnightController: NetworkBehaviour
 		ChangeColor(defaultColor);
 	}
 
-	void Update ()
+	void Update()
 	{
 		if(!isLocalPlayer) {
 			return;
@@ -105,7 +105,7 @@ public class KnightController: NetworkBehaviour
 			GetComponent<SpriteRenderer>().sprite = idleImage;
 		}
 
-		if(Time.time > lastUltTime + ultCooldown)
+		if(Time.time > lastUltTime + 2f)
 		{
 			Destroy(ultCollider);
 		}
@@ -206,7 +206,7 @@ public class KnightController: NetworkBehaviour
 		mousePosition.z = 0;
 		Direction facing = GetDirection(mousePosition.x - gameObject.transform.position.x, mousePosition.y - gameObject.transform.position.y);
 
-		attackObject = GameObject.Instantiate(basicAttackSwoosh);
+		attackObject = GameObject.Instantiate(basicAttackPrefab);
 		Vector2 offsetFromKnight = new Vector2(0, 0);
 		switch(facing)
 		{
@@ -240,7 +240,7 @@ public class KnightController: NetworkBehaviour
 	[Command]
 	private void CmdCreateSpinAttackObject()
 	{
-		attackObject = GameObject.Instantiate(chargeAttackSwoosh);
+		attackObject = GameObject.Instantiate(chargeAttackPrefab);
 		attackObject.transform.position = new Vector3(transform.position.x, transform.position.y, -1);
 		NetworkServer.Spawn(attackObject);
 		Destroy(attackObject, attackSpeed);
