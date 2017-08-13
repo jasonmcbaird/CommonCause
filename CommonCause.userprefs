@@ -1,12 +1,14 @@
 ﻿<Properties StartupItem="Assembly-CSharp.csproj">
   <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" PreferredExecutionTarget="Unity.Instance.Unity Editor" />
-  <MonoDevelop.Ide.Workbench ActiveDocument="Assets/RangerBasicArrow.cs">
+  <MonoDevelop.Ide.Workbench ActiveDocument="Assets/KnightController.cs">
     <Files>
-      <File FileName="Assets/KnightController.cs" Line="237" Column="22" />
-      <File FileName="Assets/Slime.cs" Line="1" Column="1" />
-      <File FileName="Assets/Health.cs" Line="11" Column="22" />
-      <File FileName="Assets/Ranger.cs" Line="135" Column="71" />
+      <File FileName="Assets/KnightController.cs" Line="312" Column="1" />
+      <File FileName="Assets/Slime.cs" Line="19" Column="2" />
+      <File FileName="Assets/Health.cs" Line="15" Column="3" />
+      <File FileName="Assets/Ranger.cs" Line="28" Column="2" />
       <File FileName="Assets/RangerBasicArrow.cs" Line="26" Column="1" />
+      <File FileName="Assets/Bomb.cs" Line="29" Column="58" />
+      <File FileName="Assets/NetworkController.cs" Line="25" Column="42" />
     </Files>
   </MonoDevelop.Ide.Workbench>
   <MonoDevelop.Ide.DebuggingService.Breakpoints>
